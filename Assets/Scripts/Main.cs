@@ -76,7 +76,6 @@ public class Main : MonoBehaviour
             player.transform.position += new Vector3(0, 1, 0);
             player.transform.position += player.transform.forward * Time.deltaTime;
         }
-
     }
 
     void Mobs()
