@@ -29,41 +29,52 @@ public class Main : MonoBehaviour
     void Update()
     {
         AnimatorStateInfo stateinfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             playerAnimator.SetBool("isWalk", true);
-            player.transform.position += player.transform.forward * Time.deltaTime * speed;         
+            player.transform.position += player.transform.forward * Time.deltaTime * speed;
         }
-        else 
+        else
         {
             playerAnimator.SetBool("isWalk", false);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-
+            playerAnimator.SetBool("isWalkL", true);
             player.transform.Rotate(0, -100 * Time.deltaTime, 0);
-            player.transform.position += player.transform.forward * Time.deltaTime / 10* speed;
+            player.transform.position += player.transform.forward * Time.deltaTime / 10 * speed;
 
         }
-        if (Input.GetKey(KeyCode.S))
+        else
+        {
+            playerAnimator.SetBool("isWalkL", false);
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
         {
             playerAnimator.SetBool("isWalkB", true);
-            player.transform.position -= player.transform.forward * Time.deltaTime* speed;
+            player.transform.position -= player.transform.forward * Time.deltaTime * speed;
         }
         else
         {
             playerAnimator.SetBool("isWalkB", false);
         }
-        if (Input.GetKey(KeyCode.D))
-        {
 
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            playerAnimator.SetBool("isWalkR", true);
             player.transform.Rotate(0, 100 * Time.deltaTime, 0);
-            player.transform.position += player.transform.forward * Time.deltaTime / 10* speed;
+            player.transform.position += player.transform.forward * Time.deltaTime / 10 * speed;
         }
+        else
+        {
+            playerAnimator.SetBool("isWalkR", false);
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            player.transform.position += new Vector3(0, 1 , 0);
-            player.transform.position += player.transform.forward * Time.deltaTime ;
+            player.transform.position += new Vector3(0, 1, 0);
+            player.transform.position += player.transform.forward * Time.deltaTime;
         }
 
     }
