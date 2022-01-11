@@ -2,12 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : StateMachineBehaviour
+public class Jump : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-          animator.SetBool("isAttack", true);
+        if (stateInfo.IsName("Base Layer.Jump"))
+        {
+            Debug.Log("Is Jump State");
+            animator.speed = 1;
+        }
+        else
+        {
+            Debug.Log("1");
+            animator.speed = 1;
+        }
+        animator.SetBool("isJump", true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -19,7 +29,9 @@ public class Attack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("isAttack", false);
+        
+        animator.SetBool("isJump", false);
+        
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
@@ -29,8 +41,8 @@ public class Attack : StateMachineBehaviour
     //}
 
     // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+    override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // Implement code that sets up animation IK (inverse kinematics)
+    }
 }

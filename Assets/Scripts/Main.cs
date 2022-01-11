@@ -13,6 +13,11 @@ public class Main : MonoBehaviour
     private Animator playerAnimator;
     private Animation playerAnimation;
 
+    private Rigidbody playerRigidbody;
+    public float jumpForce = 200;
+    public float timeBeforeNextJump = 1.2f;
+    private float canJump = 0f;
+
     private void Awake()
     {
         Terrain();
@@ -29,8 +34,8 @@ public class Main : MonoBehaviour
     void Update()
     {
         bool isAttack=playerAnimator.GetBool("isAttack");
-
-        if (Input.GetKeyDown(KeyCode.Z))
+        bool isJump = playerAnimator.GetBool("isJump");
+        if (Input.GetKeyDown(KeyCode.Z) && !isAttack && !isJump)
         {
             playerAnimator.SetTrigger("Attack");          
         }
@@ -75,10 +80,11 @@ public class Main : MonoBehaviour
         {
             playerAnimator.SetBool("isWalkR", false);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump") && Time.time > canJump && !isAttack)
         {
-            player.transform.position += new Vector3(0, 1 , 0);
-            player.transform.position += player.transform.forward * Time.deltaTime ;
+            playerAnimator.SetTrigger("Jump");
+            playerRigidbody.AddForce(0, jumpForce, 0);
+            canJump = Time.time + timeBeforeNextJump;
         }
 
     }
@@ -108,8 +114,8 @@ public class Main : MonoBehaviour
         playerAnimator = player.GetComponent<Animator>();
         
         playerAnimation = player.GetComponent<Animation>();
+        playerRigidbody = player.GetComponent<Rigidbody>();
 
-       
 
     }
     void Terrain()
