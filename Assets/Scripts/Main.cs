@@ -42,6 +42,8 @@ public class Main : MonoBehaviour
 
         bool isAttack=playerAnimator.GetBool("isAttack");
         bool isJump = playerAnimator.GetBool("isJump");
+        
+
         Move(isAttack);
         if (Input.GetKeyDown(KeyCode.Z) && !isAttack && !isJump)
         {
@@ -57,18 +59,35 @@ public class Main : MonoBehaviour
     }
 
     void Move(bool isAttack)
-    {
+    {      
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            playerAnimator.SetBool("isRun",true);
+        }
+        bool isRun = playerAnimator.GetBool("isRun");
 
         //方向       上
         if (Input.GetKey(KeyCode.UpArrow) && !isAttack)
         {
-            playerAnimator.SetTrigger("Walk");
-            playerAnimator.SetBool("isWalkF", true);
-            player.transform.position += player.transform.forward * Time.deltaTime * speed;
+            if (!isRun)
+            {
+                playerAnimator.SetTrigger("Walk");
+                playerAnimator.SetBool("isWalkF", true);
+                player.transform.position += player.transform.forward * Time.deltaTime * speed;
+            }
+            else
+            {
+                playerAnimator.SetTrigger("Run");
+                player.transform.position += player.transform.forward * Time.deltaTime * speed;
+            }
         }
         else
         {
             playerAnimator.SetBool("isWalkF", false);
+            playerAnimator.SetBool("isRun", false);
+            playerAnimator.ResetTrigger("Walk");
+            playerAnimator.ResetTrigger("Run");
+
         }
         //方向       下
         if (Input.GetKey(KeyCode.DownArrow) && !isAttack)
