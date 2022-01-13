@@ -13,6 +13,6 @@ public class VillageWaterMillWheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.Rotate(new Vector3(4 * Time.deltaTime, 0, 0));
+        gameObject.transform.Rotate(new Vector3(10 * Time.deltaTime, 0, 0));
     }
 }
