@@ -9,6 +9,7 @@ public class Jump : StateMachineBehaviour
     {
 
         animator.SetBool("isJump", true);
+        animator.SetBool("isAttack", false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
