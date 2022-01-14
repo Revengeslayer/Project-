@@ -39,12 +39,13 @@ public class Main : MonoBehaviour
     {
         Bye();
 
-
         bool isAttack=playerAnimator.GetBool("isAttack");
         bool isJump = playerAnimator.GetBool("isJump");
-        
+        AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
 
         Move(isAttack, isJump);
+        
+
         if (Input.GetKeyDown(KeyCode.Z) && !isAttack && !isJump)
         {
             playerAnimator.SetTrigger("Attack");
@@ -72,13 +73,11 @@ public class Main : MonoBehaviour
         {
             if (!isRun)
             {
-                playerAnimator.SetTrigger("Walk");
                 playerAnimator.SetBool("isWalkF", true);
                 player.transform.position += player.transform.forward * Time.deltaTime * speed;
             }
             else
             {
-                playerAnimator.SetTrigger("Run");
                 player.transform.position += player.transform.forward * Time.deltaTime * speed*2;
             }
         }
@@ -86,14 +85,10 @@ public class Main : MonoBehaviour
         {
             playerAnimator.SetBool("isWalkF", false);
             playerAnimator.SetBool("isRun", false);
-            playerAnimator.ResetTrigger("Walk");
-            playerAnimator.ResetTrigger("Run");
-
         }
         //方向       下
         if (Input.GetKey(KeyCode.DownArrow) && !isAttack)
         {
-            playerAnimator.SetTrigger("Walk");
             playerAnimator.SetBool("isWalkB", true);
             player.transform.position -= player.transform.forward * Time.deltaTime * speed;
         }
@@ -104,7 +99,6 @@ public class Main : MonoBehaviour
         //方向       左
         if (Input.GetKey(KeyCode.LeftArrow) && !isAttack)
         {
-            playerAnimator.SetTrigger("Walk");
             playerAnimator.SetBool("isWalkL", true);
             player.transform.Rotate(0, -100 * Time.deltaTime, 0);
             player.transform.position += player.transform.forward * Time.deltaTime / 10 * speed;
@@ -117,7 +111,7 @@ public class Main : MonoBehaviour
         //方向       右
         if (Input.GetKey(KeyCode.RightArrow) && !isAttack)
         {
-            playerAnimator.SetTrigger("Walk");
+
             playerAnimator.SetBool("isWalkR", true);
             player.transform.Rotate(0, 100 * Time.deltaTime, 0);
             player.transform.position += player.transform.forward * Time.deltaTime / 10 * speed;

@@ -19945,10 +19945,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0c01cb13dabef4282677fac9f65115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Heightx: 0.88
-  Heighty: 0
-  Heightz: 1.22
   offect: {x: 6, y: 4, z: 1}
+  smoothTime: 0.35
 --- !u!4 &1466236797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 5b0825ecf79d74f4fbc00c5ca5936ac7, type: 3}
