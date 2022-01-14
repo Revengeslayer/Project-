@@ -3380,6 +3380,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Viking_Bridge
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd4ef6daa8f3565449e7891e243d089b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bd4ef6daa8f3565449e7891e243d089b, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -4724,6 +4728,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Viking_tavern (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5459,6 +5467,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: c6211afd5233f5a41b826f6582f2b90e, type: 3}
       propertyPath: m_Name
       value: ShopA (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c6211afd5233f5a41b826f6582f2b90e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c6211afd5233f5a41b826f6582f2b90e, type: 3}
       propertyPath: m_RootOrder
@@ -6319,6 +6331,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
       propertyPath: m_Name
       value: Viking_tavern
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
       propertyPath: m_RootOrder
@@ -7431,6 +7447,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 0d1ca4f020fb42d49890a9a2881d843b, type: 3}
       propertyPath: m_Name
       value: Viking_Brewry
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 0d1ca4f020fb42d49890a9a2881d843b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0d1ca4f020fb42d49890a9a2881d843b, type: 3}
       propertyPath: m_RootOrder
@@ -9487,7 +9507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 581996764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9989,6 +10009,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: f8af16e998587f64ba091e302a7d1cca, type: 3}
       propertyPath: m_Name
       value: Viking_Watermill (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f8af16e998587f64ba091e302a7d1cca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: f8af16e998587f64ba091e302a7d1cca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f8af16e998587f64ba091e302a7d1cca, type: 3}
       propertyPath: m_RootOrder
@@ -12287,6 +12315,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Viking_Tower
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 849c968d90211fe4b92553522c7e92ca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 849c968d90211fe4b92553522c7e92ca, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -12491,6 +12523,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
       propertyPath: m_Name
       value: Viking_tavern (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
       propertyPath: m_RootOrder
@@ -13282,6 +13318,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 849c968d90211fe4b92553522c7e92ca, type: 3}
       propertyPath: m_Name
       value: Viking_Tower (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 849c968d90211fe4b92553522c7e92ca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 849c968d90211fe4b92553522c7e92ca, type: 3}
       propertyPath: m_RootOrder
@@ -17773,6 +17813,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Viking_tavern (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -19583,6 +19627,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopA (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c6211afd5233f5a41b826f6582f2b90e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c6211afd5233f5a41b826f6582f2b90e, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -21004,6 +21052,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: c6211afd5233f5a41b826f6582f2b90e, type: 3}
       propertyPath: m_Name
       value: ShopA
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c6211afd5233f5a41b826f6582f2b90e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c6211afd5233f5a41b826f6582f2b90e, type: 3}
       propertyPath: m_RootOrder
@@ -23200,8 +23252,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0c01cb13dabef4282677fac9f65115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offect: {x: 6, y: 4, z: 1}
+  offect: {x: 6, y: 4.5, z: 0.5}
   smoothTime: 0.35
+  down: -0.08
+  up: 1
+  CameraHitLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &1465524103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29455,6 +29512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Viking_tavern (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -32740,6 +32801,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
       propertyPath: m_Name
       value: Viking_tavern (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d240efaa117c87840ac8c54317aeb5f1, type: 3}
       propertyPath: m_RootOrder
