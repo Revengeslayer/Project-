@@ -44,10 +44,11 @@ public class Main : MonoBehaviour
         bool isJump = playerAnimator.GetBool("isJump");
         
 
-        Move(isAttack);
+        Move(isAttack, isJump);
         if (Input.GetKeyDown(KeyCode.Z) && !isAttack && !isJump)
         {
-            playerAnimator.SetTrigger("Attack");          
+            playerAnimator.SetTrigger("Attack");
+            
         }       
         if (Input.GetButtonDown("Jump") && Time.time > canJump && !isAttack)
         {
@@ -58,7 +59,7 @@ public class Main : MonoBehaviour
 
     }
 
-    void Move(bool isAttack)
+    void Move(bool isAttack, bool isJump)
     {      
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -78,7 +79,7 @@ public class Main : MonoBehaviour
             else
             {
                 playerAnimator.SetTrigger("Run");
-                player.transform.position += player.transform.forward * Time.deltaTime * speed;
+                player.transform.position += player.transform.forward * Time.deltaTime * speed*2;
             }
         }
         else
@@ -186,4 +187,6 @@ public class Main : MonoBehaviour
     {
         terrainPrefabIns = LoadTerrain.LoadData();
     }
+
+
 }
