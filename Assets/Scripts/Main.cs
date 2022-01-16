@@ -46,10 +46,12 @@ public class Main : MonoBehaviour
         Move(isAttack, isJump);
         
 
-        if (Input.GetKeyDown(KeyCode.Z) && !isAttack && !isJump)
+        if (Input.GetKeyDown(KeyCode.Z) && !isJump)
         {
             playerAnimator.SetTrigger("Attack");
-            
+            playerAnimator.SetInteger("atkCount", playerAnimator.GetInteger("SetInteger") + 1);
+            player.transform.position += player.transform.forward * Time.deltaTime * speed;
+
         }       
         if (Input.GetButtonDown("Jump") && Time.time > canJump && !isAttack)
         {
