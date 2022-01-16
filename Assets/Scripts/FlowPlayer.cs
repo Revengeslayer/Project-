@@ -20,11 +20,16 @@ public class FlowPlayer : MonoBehaviour
     private Vector3 downPos;
     private Vector3 leftPos;
     private Vector3 rightPos;
+    private Vector3 hitPos;
+    public float forDown;
     bool bRayDown;
     bool bRayRight;
     bool bRayUp;
     bool bRayLeft;
-
+    bool ba1Ray;
+    Ray a1Ray;
+    private float i;
+    private RaycastHit hit;
 
     // Update is called once per frame
 
@@ -70,10 +75,15 @@ public class FlowPlayer : MonoBehaviour
         Vector3 c = playerPos.position - upPos;     //upPos
         Vector3 d = playerPos.position - leftPos ;  //leftPos
         float fDist = CtoC.magnitude * rayLength;  //get length
-        CtoC.y = 0;
+        Ray a1Ray = new Ray(downPos, a + new Vector3(0, yPos, forDown));
+        //for (i = 1; i < 10; i++) 
+        //{
+        //    a1Ray = new Ray(downPos, a + new Vector3(0, yPos, (forDown - playerPos.position.z) / 10 * i + forDown));
+        //    ba1Ray = Physics.Raycast(a1Ray, out hit, rayLength, CameraHitLayer);
+        //    Debug.DrawRay(downPos, a + new Vector3(0, yPos, (forDown - playerPos.position.z) / 10 * i + forDown) * fDist);
+        //}
 
-        CtoC.Normalize();
-        a.Normalize();       
+        a.Normalize();      
         b.Normalize();        
         c.Normalize();        
         d.Normalize();
@@ -84,28 +94,45 @@ public class FlowPlayer : MonoBehaviour
         bRayRight = Physics.Raycast(rightPos, ( b + new Vector3(0 , yPos , 0 )), fDist, CameraHitLayer);
         bRayUp = Physics.Raycast(upPos, (c + new Vector3( 0 , yPos , 0 )), fDist, CameraHitLayer);
         bRayLeft = Physics.Raycast(leftPos, (d + new Vector3( 0 , yPos , 0 )), fDist, CameraHitLayer);
+        ba1Ray = Physics.Raycast(downPos, (a + new Vector3(0, yPos, forDown)), fDist, CameraHitLayer); //probe
 
 
 
         //Debug.DrawRay(gameObject.transform.position , (a + new Vector3(0, down, 0)) * fDist );
-        Debug.DrawRay( gameObject.transform.position , (CtoC + new Vector3(0, yPos, 0)) * fDist );  //Camera
-        Debug.DrawRay(downPos, (a + new Vector3(0, yPos, 0)) * fDist); 
+        Debug.DrawRay( gameObject.transform.position , (CtoC  * fDist ));  //Camera
+        Debug.DrawRay(downPos, (a + new Vector3(0, yPos, 0)) * fDist);
+        Debug.DrawRay(downPos, (a + new Vector3(0, yPos, forDown)) * fDist);  //drawprobe
         Debug.DrawRay(rightPos, (b + new Vector3(0, yPos, 0)) * fDist);
         Debug.DrawRay(upPos, (c + new Vector3(0, yPos, 0)) * fDist);
         Debug.DrawRay(leftPos, (d + new Vector3(0, yPos, 0)) * fDist);
+        //ba1Ray = Physics.Raycast(a1Ray, out hit,rayLength, CameraHitLayer); // probe
+        
+
+
 
 
         //Debug.Log(hitInfo);
-
-        if (bRayDown == true )
+        // a = b * c
+        if (ba1Ray || bRayDown == true )
         {
-            //float CCdotR = Vector3.Dot( CtoC, -b );
-            //gameObject.transform.position = Vector3.SmoothDamp(transform.position, playerPos.position + new Vector3(offect.x, offect.y + 5, offect.z), ref cameraVelocity, smoothTime);
+            //備用
+            //hitPos = (hit.transform.position - downPos); //get hit vec
+            //hitPos.y = 0;
+            //hitPos.Normalize();
+            //a.y = 0;
+            //a.Normalize();
+            //float downPosToC = Vector3.Dot(a, hitPos);  //cos
+            //備用
+
+
+
             gameObject.transform.position = Vector3.SmoothDamp(transform.position , rightPos , ref cameraVelocity, smoothTime);
             //gameObject.transform.Rotate(0, (downPos.x - rightPos.x) * RotateSpeed * Time.deltaTime, 0);
             gameObject.transform.forward += (b / smoothTime * Time.deltaTime * 0.5f) ;
 
+            Debug.Log(ba1Ray);
             Debug.Log(bRayDown);
+            //Debug.DrawLine(downPos, hit.transform.position, Color.red, 0.1f, true);
         }
         //else if( bRayDown == false && bRayRight == false && bRayUp == false && bRayLeft == false )
         else if (bRayDown == false )
@@ -115,7 +142,7 @@ public class FlowPlayer : MonoBehaviour
             Debug.Log(bRayDown);
         }
     }
-
+    #region SetCameraPos & tryRay
     void SetCameraPos()
     {
         upPos = playerPos.position + new Vector3( -offect.x, offect.y, -offect.z );
@@ -133,4 +160,6 @@ public class FlowPlayer : MonoBehaviour
             Debug.Log(hit.transform.name);
         }
     }
+
+    #endregion
 }
