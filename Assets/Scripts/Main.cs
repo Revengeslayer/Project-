@@ -6,9 +6,10 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     public float speed;
+    public static bool canMove;
     private List<GameObject> monsterPrefabIns;
     private List<GameObject> terrainPrefabIns;
-    private GameObject player;
+    public static  GameObject player;
 
     private Animator playerAnimator;
     private Animation playerAnimation;
@@ -24,6 +25,7 @@ public class Main : MonoBehaviour
     
     private void Awake()
     {
+        canMove = true;
         Terrain();
         //Mobs();
         Player();
@@ -38,12 +40,27 @@ public class Main : MonoBehaviour
     void Update()
     {
         Bye();
-
+        
         bool isAttack=playerAnimator.GetBool("isAttack");
         bool isJump = playerAnimator.GetBool("isJump");
+        bool isRun = playerAnimator.GetBool("isRun");
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isRun)
+        {
+            playerAnimator.SetBool("isRun", true);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift) && isRun)
+        {
+            playerAnimator.SetBool("isRun", false);
+        }
+        if (!playerAnimator.GetBool("isWalkF") && !playerAnimator.GetBool("isWalkB") && !playerAnimator.GetBool("isWalkL") && !playerAnimator.GetBool("isWalkR"))
+        {
+            playerAnimator.SetBool("isRun", false);
+        }
+
         AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
 
-        Move(isAttack, isJump);
+        MoveFunc(isAttack, isJump, isRun);
         
 
         if (Input.GetKeyDown(KeyCode.Z) && !isJump)
@@ -59,69 +76,27 @@ public class Main : MonoBehaviour
             playerRigidbody.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
         }
-
     }
 
-    void Move(bool isAttack, bool isJump)
-    {      
-        if (Input.GetKey(KeyCode.LeftShift))
+    void MoveFunc(bool isAttack, bool isJump , bool isRun)
+    {
+        float moveSpeed = 0;
+        if (isRun)
         {
-            playerAnimator.SetBool("isRun",true);
-        }
-        bool isRun = playerAnimator.GetBool("isRun");
-
-        //方向       上
-        if (Input.GetKey(KeyCode.UpArrow) && !isAttack)
-        {
-            if (!isRun)
+            DirControl(isAttack, ref moveSpeed, 2);
+            if (canMove)
             {
-                playerAnimator.SetBool("isWalkF", true);
-                player.transform.position += player.transform.forward * Time.deltaTime * speed;
-            }
-            else
-            {
-                player.transform.position += player.transform.forward * Time.deltaTime * speed*2;
+                Move(moveSpeed);
             }
         }
         else
         {
-            playerAnimator.SetBool("isWalkF", false);
-            playerAnimator.SetBool("isRun", false);
-        }
-        //方向       下
-        if (Input.GetKey(KeyCode.DownArrow) && !isAttack)
-        {
-            playerAnimator.SetBool("isWalkB", true);
-            player.transform.position -= player.transform.forward * Time.deltaTime * speed;
-        }
-        else
-        {
-            playerAnimator.SetBool("isWalkB", false);
-        }
-        //方向       左
-        if (Input.GetKey(KeyCode.LeftArrow) && !isAttack)
-        {
-            playerAnimator.SetBool("isWalkL", true);
-            player.transform.Rotate(0, -100 * Time.deltaTime, 0);
-            player.transform.position += player.transform.forward * Time.deltaTime / 10 * speed;
-
-        }
-        else
-        {
-            playerAnimator.SetBool("isWalkL", false);
-        }
-        //方向       右
-        if (Input.GetKey(KeyCode.RightArrow) && !isAttack)
-        {
-
-            playerAnimator.SetBool("isWalkR", true);
-            player.transform.Rotate(0, 100 * Time.deltaTime, 0);
-            player.transform.position += player.transform.forward * Time.deltaTime / 10 * speed;
-        }
-        else
-        {
-            playerAnimator.SetBool("isWalkR", false);
-        }
+            DirControl(isAttack, ref moveSpeed, 1);
+            if (canMove)
+            {
+                Move(moveSpeed);
+            }
+        }     
     }
 
     void Bye()
@@ -184,5 +159,76 @@ public class Main : MonoBehaviour
         terrainPrefabIns = LoadTerrain.LoadData();
     }
 
+   Vector3 CheckForWard()
+    {
+        var x = -Input.GetAxis("Vertical");
+        var z = Input.GetAxis("Horizontal");
+        
+        player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(x, 0, z),0.8f);
 
+        
+
+        return player.transform.forward;
+    }
+
+    void DirControl(bool isAttack, ref float moveSpeed,float speed)
+    {
+        //方向       上
+        if (Input.GetKey(KeyCode.UpArrow) && !isAttack)
+        {
+            playerAnimator.SetBool("isWalkF", true);
+            moveSpeed = speed;
+        }
+        else
+        {
+            playerAnimator.SetBool("isWalkF", false);
+        }
+
+        //方向       下
+        if (Input.GetKey(KeyCode.DownArrow) && !isAttack)
+        {
+            playerAnimator.SetBool("isWalkB", true);
+            moveSpeed = speed;
+        }
+        else
+        {
+            playerAnimator.SetBool("isWalkB", false);
+        }
+
+        //方向       左
+        if (Input.GetKey(KeyCode.LeftArrow) && !isAttack)
+        {
+            playerAnimator.SetBool("isWalkL", true);
+            moveSpeed = speed;
+        }
+        else
+        {
+            playerAnimator.SetBool("isWalkL", false);
+        }
+
+        //方向       右
+        if (Input.GetKey(KeyCode.RightArrow) && !isAttack)
+        {
+            playerAnimator.SetBool("isWalkR", true);
+
+            moveSpeed = speed;
+        }
+        else
+        {
+            playerAnimator.SetBool("isWalkR", false);
+        }
+    }
+    void Move(float n)
+    {
+        
+        if (n != 0)
+        {          
+            player.transform.position += CheckForWard() * Time.deltaTime * Accel() * n;
+        }
+    }
+    float Accel()
+    {
+        float move = Mathf.Lerp(0, speed, 0.3f);
+        return move;
+    }
 }
