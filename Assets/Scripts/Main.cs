@@ -45,11 +45,11 @@ public class Main : MonoBehaviour
         bool isJump = playerAnimator.GetBool("isJump");
         bool isRun = playerAnimator.GetBool("isRun");
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isRun)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !isRun)
         {
             playerAnimator.SetBool("isRun", true);
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && isRun)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && isRun)
         {
             playerAnimator.SetBool("isRun", false);
         }
@@ -164,7 +164,7 @@ public class Main : MonoBehaviour
         var x = -Input.GetAxis("Vertical");
         var z = Input.GetAxis("Horizontal");
         
-        player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(x, 0, z),0.8f);
+        player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(x, 0, z),0.95f);
 
         
 
