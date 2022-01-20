@@ -42,17 +42,17 @@ public class FlowPlayer : MonoBehaviour
     {
 
         //gameObject.transform.rotation *= rotate;
-        //¹Á¸Õ¥¢±Ñrotate
+        //ï¿½ï¿½ï¿½Õ¥ï¿½ï¿½ï¿½rotate
 
         //gameObject.transform.position = new Vector3(playerPos.position.x + offect.x , playerPos.position.y + offect.y, playerPos.position.z + offect.z);
-        //­×¥¿«áªº­ìª©
+        //ï¿½×¥ï¿½ï¿½áªºï¿½ìª©
 
         //gameObject.transform.position = Vector3.SmoothDamp(transform.position, playerPos.position + new Vector3(0,0,0),ref cameraVelocity , smoothTime );
-        //SmoothDamp(¦Û¤vªºpos,¥Ø¼Ðªºpos,¨S¤ÏÀ³¯Â·Ó§Û,·Æ°Êªº®É¶¡)
+        //SmoothDamp(ï¿½Û¤vï¿½ï¿½pos,ï¿½Ø¼Ðªï¿½pos,ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½Â·Ó§ï¿½,ï¿½Æ°Êªï¿½ï¿½É¶ï¿½)
 
         //BasicMove();
         SetCameraPos();
-        CameraRaycast();
+        BasicMove();
 
         //tryRay();
     }
@@ -108,21 +108,21 @@ public class FlowPlayer : MonoBehaviour
         //ba1Ray = Physics.Raycast(a1Ray, out hit,rayLength, CameraHitLayer); // probe
         
 
-
+float i = 10;
 
 
         //Debug.Log(hitInfo);
         // a = b * c
-        if (ba1Ray || bRayDown == true )
+        if (ba1Ray && bRayDown == true && i == 11)
         {
-            //³Æ¥Î
+            //ï¿½Æ¥ï¿½
             //hitPos = (hit.transform.position - downPos); //get hit vec
             //hitPos.y = 0;
             //hitPos.Normalize();
             //a.y = 0;
             //a.Normalize();
             //float downPosToC = Vector3.Dot(a, hitPos);  //cos
-            //³Æ¥Î
+            //ï¿½Æ¥ï¿½
 
 
 
@@ -135,7 +135,7 @@ public class FlowPlayer : MonoBehaviour
             //Debug.DrawLine(downPos, hit.transform.position, Color.red, 0.1f, true);
         }
         //else if( bRayDown == false && bRayRight == false && bRayUp == false && bRayLeft == false )
-        else if (bRayDown == false )
+        else if (bRayDown == false && i ==11)
         {
             BasicMove();
             gameObject.transform.forward += (a / smoothTime * Time.deltaTime * 0.5f) ;
