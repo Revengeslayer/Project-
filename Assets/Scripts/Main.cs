@@ -66,10 +66,12 @@ public class Main : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && !isJump)
         {
             playerAnimator.SetTrigger("Attack");
-            playerAnimator.SetInteger("atkCount", playerAnimator.GetInteger("SetInteger") + 1);
+            playerAnimator.SetInteger("atkCount", playerAnimator.GetInteger("atkCount") + 1);
             player.transform.position += player.transform.forward * Time.deltaTime * speed;
+            
 
-        }       
+
+        }
         if (Input.GetButtonDown("Jump") && Time.time > canJump && !isAttack)
         {
             playerAnimator.SetTrigger("Jump");
@@ -176,8 +178,16 @@ public class Main : MonoBehaviour
         //¤è¦V       ¤W
         if (Input.GetKey(KeyCode.UpArrow) && !isAttack)
         {
-            playerAnimator.SetBool("isWalkF", true);
-            moveSpeed = speed;
+            playerAnimator.SetBool("isWalkF", true);           
+            if(Input.GetKey(KeyCode.DownArrow))
+            {
+                playerAnimator.SetBool("isWalkF", false);
+                moveSpeed = 0;
+            }
+            else
+            {
+                moveSpeed = speed;
+            }
         }
         else
         {
@@ -188,7 +198,15 @@ public class Main : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow) && !isAttack)
         {
             playerAnimator.SetBool("isWalkB", true);
-            moveSpeed = speed;
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                playerAnimator.SetBool("isWalkB", false);
+                moveSpeed = 0;
+            }
+            else
+            {
+                moveSpeed = speed;
+            }
         }
         else
         {
@@ -199,7 +217,15 @@ public class Main : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow) && !isAttack)
         {
             playerAnimator.SetBool("isWalkL", true);
-            moveSpeed = speed;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                playerAnimator.SetBool("isWalkL", false);
+                moveSpeed = 0;
+            }
+            else
+            {
+                moveSpeed = speed;
+            }
         }
         else
         {
@@ -210,8 +236,15 @@ public class Main : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow) && !isAttack)
         {
             playerAnimator.SetBool("isWalkR", true);
-
-            moveSpeed = speed;
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                playerAnimator.SetBool("isWalkR", false);
+                moveSpeed = 0;
+            }
+            else
+            {
+                moveSpeed = speed;
+            }
         }
         else
         {
