@@ -11,6 +11,10 @@ TagManager:
   - Boss01_2
   - Boss01_3
   - Boss01_4
+  - Battle01_2
+  - Battle01_1
+  - Battle01(1)
+  - Village01
   layers:
   - Default
   - TransparentFX
