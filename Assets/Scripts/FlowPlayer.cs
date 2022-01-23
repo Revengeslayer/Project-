@@ -42,7 +42,7 @@ public class FlowPlayer : MonoBehaviour
     private void Start()
     {
         //gameObject.transform.position = Vector3.SmoothDamp(transform.position, downPos, ref cameraVelocity, smoothTime);
-        gameObject.transform.position = playerPos.position + new Vector3(offect.x - 20, offect.y + 5, offect.z + 5);
+        gameObject.transform.position = playerPos.position + new Vector3(offect.x , offect.y , offect.z );
         gameObject.transform.forward = new Vector3(gameObject.transform.forward.x * -1, gameObject.transform.forward.y, gameObject.transform.forward.z );
         CMRotate = gameObject.transform.forward;
     }
