@@ -75,7 +75,7 @@ public class Trigger : MonoBehaviour
         else if (colliderTag == "Battle01")
         {
             FlowPlayer.CARotate = true;
-            FlowPlayer.offect = new Vector3(8.5f, 10f, 0);
+            FlowPlayer.offect = new Vector3(20f, 6f, 0);
             FlowPlayer.CMRotate = CMRotateVillage;
             FlowPlayer.smoothTime = 0.1f;
         }
