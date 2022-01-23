@@ -9,7 +9,7 @@ public class FlowPlayer : MonoBehaviour
     public static string colliderTag;
     public static Vector3 offect = new Vector3(-8.5f, 7.5f, 0);
     private Vector3 cameraVelocity = Vector3.zero;
-    public float smoothTime = 2;
+    public static float smoothTime = 2;
     public float xPos;
     private float yPos;
     public float zPos;
