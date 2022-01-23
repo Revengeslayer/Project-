@@ -57,7 +57,7 @@ public class Trigger : MonoBehaviour
             FlowPlayer.CARotate = true;
             FlowPlayer.offect = new Vector3(-8.5f, 7.5f, 0);
             FlowPlayer.CMRotate = CMRotateBattle01;
-            FlowPlayer.smoothTime = 2;
+            FlowPlayer.smoothTime = 0.1f;
         }
         else if (colliderTag == "Village01")
         {
@@ -77,7 +77,7 @@ public class Trigger : MonoBehaviour
             FlowPlayer.CARotate = true;
             FlowPlayer.offect = new Vector3(8.5f, 10f, 0);
             FlowPlayer.CMRotate = CMRotateVillage;
-            FlowPlayer.smoothTime = 0.2f;
+            FlowPlayer.smoothTime = 0.1f;
         }
         else if (colliderTag == "Battle01(1)")
         {
