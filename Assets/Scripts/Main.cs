@@ -167,10 +167,8 @@ public class Main : MonoBehaviour
         var z = Input.GetAxis("Horizontal");
         var a = -Camera.main.transform.forward * x;
         a.y = 0;
-        a.Normalize();
         var b = Camera.main.transform.right * z;
         b.y = 0;
-        b.Normalize();
 
         player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(a.x, 0, b.z), 0.95f);
         //player.transform.forward = new Vector3(x, 0, z);
@@ -264,18 +262,6 @@ public class Main : MonoBehaviour
         
         if (n != 0)
         {
-            var x = -Input.GetAxis("Vertical");
-            var z = Input.GetAxis("Horizontal");
-            var a = -Camera.main.transform.forward * x;
-            a.y = 0;
-            a.Normalize();
-            var b = Camera.main.transform.right * z;
-            b.y = 0;
-            b.Normalize();
-
-            //player.transform.forward = new Vector3(x, 0, z);
-            //player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(x, 0, z), 0.95f);
-            //player.transform.position += new Vector3(a.x, 0, b.z) * Time.deltaTime * Accel() * n;
             player.transform.position += CheckForWard() * Time.deltaTime * Accel() * n;
         }
     }
