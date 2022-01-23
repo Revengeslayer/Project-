@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Village
+  - Battle01
+  - Boss01
+  - Boss01_1
+  - Boss01_2
+  - Boss01_3
+  - Boss01_4
   layers:
   - Default
   - TransparentFX
