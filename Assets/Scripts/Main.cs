@@ -165,6 +165,7 @@ public class Main : MonoBehaviour
     {
         var x = -Input.GetAxis("Vertical");
         var z = Input.GetAxis("Horizontal");
+
         var a = -Camera.main.transform.forward * x;
         a.y = 0;
         a.Normalize();
@@ -173,11 +174,6 @@ public class Main : MonoBehaviour
         b.Normalize();
 
         player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(a.x, 0, b.z), 0.95f);
-        //player.transform.forward = new Vector3(x, 0, z);
-        //player.transform.position += new Vector3(a.x, 0, b.z) * Time.deltaTime * Accel() * n;
-
-
-
         return player.transform.forward;
     }
 
