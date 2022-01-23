@@ -57,8 +57,9 @@ public class Trigger : MonoBehaviour
             FlowPlayer.CARotate = true;
             FlowPlayer.offect = new Vector3(-8.5f, 7.5f, 0);
             FlowPlayer.CMRotate = CMRotateBattle01;
+            FlowPlayer.smoothTime = 2;
         }
-        else if (colliderTag == "Battle01")
+        else if (colliderTag == "Village01")
         {
             //    //FlowPlayer.XT *= -1;
             //    //FlowPlayer.ZT *= -1;
@@ -66,39 +67,66 @@ public class Trigger : MonoBehaviour
             //    CA.transform.forward = 
             //    FlowPlayer.colliderTag = colliderTag;
 
-            Debug.Log(colliderTag + "EnterBattle");
             FlowPlayer.CARotate = true;
-            FlowPlayer.offect = new Vector3(8.5f, 7.5f, 0);
+            FlowPlayer.offect = new Vector3(-8.5f, 7.5f, 0);
+            FlowPlayer.CMRotate = CMRotateBattle01;
+            FlowPlayer.smoothTime = 1;
+        }
+        else if (colliderTag == "Battle01")
+        {
+            FlowPlayer.CARotate = true;
+            FlowPlayer.offect = new Vector3(8.5f, 10f, 0);
             FlowPlayer.CMRotate = CMRotateVillage;
+            FlowPlayer.smoothTime = 0.2f;
+        }
+        else if (colliderTag == "Battle01(1)")
+        {
+            FlowPlayer.CARotate = true;
+            FlowPlayer.offect = new Vector3(8.5f, 10f, 0);
+            FlowPlayer.CMRotate = CMRotateVillage;
+            FlowPlayer.smoothTime = 3f;
         }
         else if(colliderTag == "Boss01")
         {
-            FlowPlayer.offect = new Vector3(5.5f, 4.5f, 0);
-            FlowPlayer.CMRotate = CMRotateVillage; 
+            FlowPlayer.offect = new Vector3(10f, 9f, 0);
+            FlowPlayer.CMRotate = CMRotateVillage;
+            FlowPlayer.smoothTime = 3;
         }
         else if (colliderTag == "Boss01_1")
         {
             FlowPlayer.offect = new Vector3(0, 1.0f, 3f);
             //FlowPlayer.offect = new Vector3(0, 1.3f , 3);
             FlowPlayer.CMRotate = Boss01_1;//- new Vector3(0, 0.5f, 0);
+            FlowPlayer.smoothTime = 2;
         }
         else if (colliderTag == "Boss01_2")
         {
-            FlowPlayer.offect = new Vector3(0, 4.5f, 6f);
+            FlowPlayer.offect = new Vector3(10f, 9f, 0f);
             //FlowPlayer.offect = new Vector3(0, 1.3f , 3);
-            FlowPlayer.CMRotate = Boss01_1 - new Vector3(0, 0.5f, 0);
+            //FlowPlayer.CMRotate = Boss01_1 - new Vector3(0, 0.5f, 0);
+            FlowPlayer.CMRotate = CMRotateVillage;
+            FlowPlayer.smoothTime = 2f;
         }
         else if (colliderTag == "Boss01_3")
         {
             FlowPlayer.offect = new Vector3(0, 5f, 6.5f);
             //FlowPlayer.offect = new Vector3(0, 1.3f , 3);
             FlowPlayer.CMRotate = Boss01_1 - new Vector3(0, 0.5f, 0);
+            FlowPlayer.smoothTime = 2;
         }
         else if (colliderTag == "Boss01_4")
         {
-            FlowPlayer.offect = new Vector3(10.5f, 7.5f, 0);
+            FlowPlayer.offect = new Vector3(13.5f, 7.5f, 0);
             FlowPlayer.CMRotate = CMRotateVillage;
+            FlowPlayer.smoothTime = 0.5f;
         }
+        else if (colliderTag == "Battle01_2")
+        {
+            FlowPlayer.offect = new Vector3(11.5f, 7.5f, 0);
+            FlowPlayer.CMRotate = CMRotateVillage;
+            FlowPlayer.smoothTime = 3f;
+        }
+
         else
         {
             //FlowPlayer.offect = new Vector3(8.5f, 5.5f, 0);
@@ -107,15 +135,15 @@ public class Trigger : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        //if (colliderTag == "TriggerVillage")
-        //{
-        //    //FlowPlayer.XT *= -1;
-        //    //FlowPlayer.ZT *= -1;
-        //    FlowPlayer.offect = new Vector3(8.5f, 5.5f, 0);
-        //    Debug.Log(colliderTag + "Exit");
-        //    colliderTag = "";
-        //}
-        Debug.Log(other.tag + "exit");
+        colliderTag = other.tag;
+        if (colliderTag == "Boss01_2")
+        {
+            FlowPlayer.offect = new Vector3(10f, 9f, 0);
+            //FlowPlayer.offect = new Vector3(0, 1.3f , 3);
+            //FlowPlayer.CMRotate = Boss01_1 - new Vector3(0, 0.5f, 0);
+            FlowPlayer.CMRotate = CMRotateVillage;
+            FlowPlayer.smoothTime = 2;
+        }
     }
 
 

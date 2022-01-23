@@ -7,12 +7,13 @@ public class Idle : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //Main.canMove = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime<0.05)
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.05)
         {
             Main.canMove = false;
         }
@@ -25,7 +26,7 @@ public class Idle : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        //Main.canMove = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
