@@ -85,7 +85,7 @@ public class Main : MonoBehaviour
         float moveSpeed = 0;
         if (isRun)
         {
-            DirControl(isAttack, ref moveSpeed, 2);
+            DirControl(isAttack, ref moveSpeed, 2.8f);
             if (canMove)
             {
                 Move(moveSpeed);
@@ -93,7 +93,7 @@ public class Main : MonoBehaviour
         }
         else
         {
-            DirControl(isAttack, ref moveSpeed, 1);
+            DirControl(isAttack, ref moveSpeed, 2.8f);
             if (canMove)
             {
                 Move(moveSpeed);
@@ -177,80 +177,22 @@ public class Main : MonoBehaviour
 
     void DirControl(bool isAttack, ref float moveSpeed,float speed)
     {
-        //方向       上
-        if (Input.GetKey(KeyCode.UpArrow) && !isAttack)
+        if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) != false)
         {
-            playerAnimator.SetBool("isWalkF", true);           
-            if(Input.GetKey(KeyCode.DownArrow))
+            if(isAttack)
             {
-                playerAnimator.SetBool("isWalkF", false);
-                moveSpeed = 0;
+                return;
             }
             else
             {
+                playerAnimator.SetBool("isWalkF", true);
                 moveSpeed = speed;
             }
         }
         else
         {
             playerAnimator.SetBool("isWalkF", false);
-        }
-
-        //方向       下
-        if (Input.GetKey(KeyCode.DownArrow) && !isAttack)
-        {
-            playerAnimator.SetBool("isWalkB", true);
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                playerAnimator.SetBool("isWalkB", false);
-                moveSpeed = 0;
-            }
-            else
-            {
-                moveSpeed = speed;
-            }
-        }
-        else
-        {
-            playerAnimator.SetBool("isWalkB", false);
-        }
-
-        //方向       左
-        if (Input.GetKey(KeyCode.LeftArrow) && !isAttack)
-        {
-            playerAnimator.SetBool("isWalkL", true);
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                playerAnimator.SetBool("isWalkL", false);
-                moveSpeed = 0;
-            }
-            else
-            {
-                moveSpeed = speed;
-            }
-        }
-        else
-        {
-            playerAnimator.SetBool("isWalkL", false);
-        }
-
-        //方向       右
-        if (Input.GetKey(KeyCode.RightArrow) && !isAttack)
-        {
-            playerAnimator.SetBool("isWalkR", true);
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                playerAnimator.SetBool("isWalkR", false);
-                moveSpeed = 0;
-            }
-            else
-            {
-                moveSpeed = speed;
-            }
-        }
-        else
-        {
-            playerAnimator.SetBool("isWalkR", false);
+            moveSpeed = 0;
         }
     }
     void Move(float n)
