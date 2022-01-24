@@ -9,6 +9,7 @@ public class Trigger : MonoBehaviour
     private Vector3 CMRotateVillage;
     private Vector3 CMRotateBattle01;
     private Vector3 Boss01_1;
+    private float YT;
 
 
     // Start is called before the first frame update
@@ -25,39 +26,33 @@ public class Trigger : MonoBehaviour
     {
 
     }
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    var a = collision.gameObject.name;  //存出collision name
-    //    var b = collision.gameObject;  //存出collision目標
-    //    var c = b.transform.position - Camera.main.transform.position;  //目標 - Camera 的向量
-    //    var d = gameObject.transform.position.y - Camera.main.transform.position.y;  //人物到Camera的y
-    //    Debug.Log(collision.gameObject.name);
-    //    if (a == "Viking_Bridge")
-    //    {
-    //        Camera.main.transform.forward += new Vector3(c.x, d, c.z) * Time.deltaTime / 20;
-    //        FlowPlayer.offect = new Vector3(8.5f, 5.5f, 0);
-    //            //* (new Vector3(8.5f, 5.5f, 0) - Camera.main.transform.position).magnitude * Time.deltaTime ;
-
-    //    }
-    //}
     void OnTriggerEnter(Collider other)
     {
-        var CA = Camera.main;
+        YT = 0;
         colliderTag = other.tag;
         Debug.Log(other.tag+ "enter");
 
         if (colliderTag == "Village")
         {
-            //    //FlowPlayer.XT *= -1;
-            //    //FlowPlayer.ZT *= -1;
-            //    //FlowPlayer.SetCameraRotate();
-            //    CA.transform.forward = 
-            //    FlowPlayer.colliderTag = colliderTag;
+            if (FlowPlayer.offect.x > 0)
+            {
+                Camera.main.transform.position = gameObject.transform.position + new Vector3(-20f, 8.5f, 0);
+                Camera.main.transform.forward = CMRotateBattle01;
+            }
 
-            FlowPlayer.CARotate = true;
-            FlowPlayer.offect = new Vector3(-8.5f, 7.5f, 0);
+            FlowPlayer.offect = new Vector3(-20f, 8.5f, 0);
             FlowPlayer.CMRotate = CMRotateBattle01;
-            FlowPlayer.smoothTime = 0.1f;
+            FlowPlayer.smoothTime = 0.25f;
+            //if (FlowPlayer.offect.x < 0)
+            //{
+            //    return;
+            //}
+            //else
+            //{
+            //    Debug.Log("<0");
+            //    Camera.main.transform.forward = CMRotateBattle01;
+            //}
+
         }
         else if (colliderTag == "Village01")
         {
@@ -74,10 +69,24 @@ public class Trigger : MonoBehaviour
         }
         else if (colliderTag == "Battle01")
         {
-            FlowPlayer.CARotate = true;
-            FlowPlayer.offect = new Vector3(20f, 6f, 0);
+            if (FlowPlayer.offect.x < 0)
+            {
+                Camera.main.transform.position = gameObject.transform.position + new Vector3(20f, 8.5f, 0);
+                Camera.main.transform.forward = CMRotateVillage;
+            }
+            FlowPlayer.offect = new Vector3(20f, 8.5f, 0);
             FlowPlayer.CMRotate = CMRotateVillage;
-            FlowPlayer.smoothTime = 0.1f;
+            FlowPlayer.smoothTime = 0.25f;
+            //if (FlowPlayer.offect.x > 0)
+            //{
+            //    return;
+            //}
+            //else
+            //{
+            //    Debug.Log(">0");
+            //    Camera.main.transform.forward = CMRotateVillage;
+            //}
+
         }
         else if (colliderTag == "Battle01(1)")
         {
@@ -133,14 +142,40 @@ public class Trigger : MonoBehaviour
             //colliderTag = "";
         }
     }
+    private void OnTriggerStay(Collider other)
+    {
+        var Y = Input.GetKeyDown(KeyCode.Y);
+        var T = 0.2f;
+        YT += Time.deltaTime;
+        if(Y == false)
+        {
+            return;
+        }
+        if (colliderTag == "Village")
+        {
+            if (Y && YT >T)
+            {
+                gameObject.transform.position = new Vector3(25.36502f, 3.036211f, 39.22498f);
+                YT = 0;
+                Y = false;
+            }
+        }
+        if (colliderTag == "Battle01")
+        {
+            if (Y && YT > T)
+            {
+                gameObject.transform.position = new Vector3(30.50537f, 2.88238f, 38.95977f);
+                YT = 0;
+                Y = false;
+            }
+        }
+    }
     void OnTriggerExit(Collider other)
     {
         colliderTag = other.tag;
         if (colliderTag == "Boss01_2")
         {
             FlowPlayer.offect = new Vector3(10f, 9f, 0);
-            //FlowPlayer.offect = new Vector3(0, 1.3f , 3);
-            //FlowPlayer.CMRotate = Boss01_1 - new Vector3(0, 0.5f, 0);
             FlowPlayer.CMRotate = CMRotateVillage;
             FlowPlayer.smoothTime = 2;
         }
