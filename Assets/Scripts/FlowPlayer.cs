@@ -7,7 +7,7 @@ public class FlowPlayer : MonoBehaviour
     public static Transform playerPos;
     public static GameObject player;
     public static string colliderTag;
-    public static Vector3 offect = new Vector3(-20f, 6f, 0);
+    public static Vector3 offect = new Vector3(-20f, 8.5f, 0);
     private Vector3 cameraVelocity = Vector3.zero;
     public static float smoothTime = 0.2f;
     public float xPos;
@@ -28,16 +28,15 @@ public class FlowPlayer : MonoBehaviour
     bool bRayRight;
     bool bRayUp;
     bool bRayLeft;
-    bool ba1Ray;
-    Ray a1Ray;
-    private float i;
-    private RaycastHit hit;
+    bool ba1Ray;    
     public static float XT = 1;
     public static float ZT = 1;
     public static bool CARotate = false;
     public static Vector3 CMRotate;
-
-    // Update is called once per frame
+    public static bool Follow;
+    private Vector3 FollowArea;
+    private Vector3 FollowVec;
+    float Fo;
 
     private void Start()
     {
@@ -45,45 +44,13 @@ public class FlowPlayer : MonoBehaviour
         gameObject.transform.position = playerPos.position + new Vector3(offect.x , offect.y , offect.z );
         gameObject.transform.forward = new Vector3(gameObject.transform.forward.x * -1, gameObject.transform.forward.y, gameObject.transform.forward.z );
         CMRotate = gameObject.transform.forward;
+        FollowVec = playerPos.position - gameObject.transform.position;
     }
     void Update()
     {
-
-        //gameObject.transform.rotation *= rotate;
-        //嘗試失敗rotate
-
-        //gameObject.transform.position = new Vector3(playerPos.position.x + offect.x , playerPos.position.y + offect.y, playerPos.position.z + offect.z);
-        //修正後的原版
-
-        //gameObject.transform.position = Vector3.SmoothDamp(transform.position, playerPos.position + new Vector3(0,0,0),ref cameraVelocity , smoothTime );
-        //SmoothDamp(自己的pos,目標的pos,沒反應純照抄,滑動的時間)
-
-
         SetCameraPos();
         BasicMove();
-        //CameraRaycast();
-
-        //tryRay();
     }
-
-    private void OnDrawGizmos()
-    {
-
-        Gizmos.color = Color.green;
-        //Gizmos.DrawLine(gameObject.transform.position , ( playerPos.position - gameObject.transform.position ) * 10.0f);
-    }
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    colliderTag = other.tag;
-    //    if (colliderTag == "TriggerVillage")
-    //    { 
-    //        gameObject.transform.forward = new Vector3(gameObject.transform.forward.x * -XT, gameObject.transform.forward.y, gameObject.transform.forward.z * -ZT);
-    //    }
-    //}
-    //void OnTriggerExit(Collider other)
-    //{
-    //    colliderTag = "";
-    //}
     public static void SetCameraRotate()
     {
         //if(colliderTag == "TriggerVillage")
@@ -96,17 +63,33 @@ public class FlowPlayer : MonoBehaviour
         //}
 
     }
+    void CheckFollow()
+    {        
+        if(!Follow)
+        {
+            FollowArea = playerPos.position - gameObject.transform.position;
+            Fo = (FollowArea - FollowVec).magnitude;
+            if (Fo < 3.0f)
+            {
+                return;
+            }
+            else
+            {
+                Follow = true;
+            }   
+        }
+    }
     void BasicMove()
     {
-        gameObject.transform.position = Vector3.SmoothDamp(transform.position, playerPos.position + offect, ref cameraVelocity, smoothTime);
-        //gameObject.transform.forward = CMRotate;
-        gameObject.transform.forward += (CMRotate / smoothTime * Time.deltaTime ) * (CMRotate -gameObject.transform.forward).magnitude;
-        //i += 1f * Time.deltaTime * 0.0001f;
-        //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, downPos, i);
-        //if (i > 0.9)
-        //{
-        //    i = 0;
-        //}
+        //if (Follow)
+        {
+            FollowArea = playerPos.position - gameObject.transform.position;
+            FollowVec = playerPos.position - gameObject.transform.position;
+            gameObject.transform.position = Vector3.SmoothDamp(transform.position, playerPos.position + offect, ref cameraVelocity, smoothTime);
+            //gameObject.transform.forward = CMRotate;
+            gameObject.transform.forward += (CMRotate / smoothTime * Time.deltaTime) * (CMRotate - gameObject.transform.forward).magnitude ;
+           //FollowVec = playerPos.position - gameObject.transform.position;
+        }
     }
     #region Set & Ray
     void CameraRaycast()

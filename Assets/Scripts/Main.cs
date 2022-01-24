@@ -37,7 +37,7 @@ public class Main : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Bye();
         
@@ -172,6 +172,23 @@ public class Main : MonoBehaviour
         b.y = 0;
 
         player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(a.x, 0, b.z), 0.95f);
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(-a.x , 0, b.z), 0.95f);
+            }
+        }
+        
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+
+                player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(a.x, 0, -b.z), 0.95f);
+            }
+        }
         return player.transform.forward;
     }
 
