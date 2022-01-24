@@ -44,6 +44,7 @@ public class Main : MonoBehaviour
         bool isAttack=playerAnimator.GetBool("isAttack");
         bool isJump = playerAnimator.GetBool("isJump");
         bool isRun = playerAnimator.GetBool("isRun");
+        bool isDodge = playerAnimator.GetBool("isDodge");
 
         if (Input.GetKeyDown(KeyCode.LeftControl) && !isRun)
         {
@@ -66,18 +67,27 @@ public class Main : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && !isJump)
         {
             playerAnimator.SetTrigger("Attack");
+            //playerAnimator.SetBool("isAttack", true);
             playerAnimator.SetInteger("atkCount", playerAnimator.GetInteger("atkCount") + 1);
-            player.transform.position += player.transform.forward * Time.deltaTime * speed;
-            
-
-
+            player.transform.position += player.transform.forward * Time.deltaTime * speed;          
         }
-        if (Input.GetButtonDown("Jump") && Time.time > canJump && !isAttack)
+        if (Input.GetButtonDown("Jump") && Time.time > canJump )
         {
             playerAnimator.SetTrigger("Jump");
             playerRigidbody.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
+            if(Input.GetKeyDown(KeyCode.Z))
+            {
+                playerAnimator.SetBool("isJumpAtk", true);
+            }
+                
         }
+        if (Input.GetKeyDown(KeyCode.C) && !isJump)
+        {
+            playerAnimator.SetTrigger("Dodge");
+            player.transform.position += player.transform.forward * Time.deltaTime * speed;
+        }
+
     }
 
     void MoveFunc(bool isAttack, bool isJump , bool isRun)
@@ -171,22 +181,24 @@ public class Main : MonoBehaviour
         var b = Camera.main.transform.right * z;
         b.y = 0;
 
-        player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(a.x, 0, b.z), 0.95f);
+
+        player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(a.x, 0, b.z), 1f);
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(-a.x , 0, b.z), 0.95f);
+
+                player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(-a.x, 0, b.z), 1f);
             }
         }
-        
+
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-
-                player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(a.x, 0, -b.z), 0.95f);
+                player.transform.forward = Vector3.Lerp(player.transform.forward, new Vector3(a.x, 0, -b.z), 1f);
             }
         }
         return player.transform.forward;
@@ -194,7 +206,7 @@ public class Main : MonoBehaviour
 
     void DirControl(bool isAttack, ref float moveSpeed,float speed)
     {
-        if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) != false)
+        if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) != false)
         {
             if(isAttack)
             {
