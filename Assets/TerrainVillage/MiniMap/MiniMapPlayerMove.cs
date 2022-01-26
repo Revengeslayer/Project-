@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class MiniMapPlayerMove : MonoBehaviour
 {
+    public GameObject miniMapPlayerImg;
+
     private float mapPlayerx;
     private float mapPlayery;
     private float mapPlayerz;
@@ -55,7 +56,10 @@ public class MiniMapPlayerMove : MonoBehaviour
         miniEndz = GameObject.Find("MiniMapEnd").transform.position.z;
 
         miniPlayermove = new Vector3( ((mapPlayerx-mapStartx)/(mapEndx-mapStartx))*(miniEndx-miniStartx)+ miniStartx, this.transform.position.y, ((mapPlayerz-mapStartz)/(mapEndz-mapStartz))*(miniEndz-miniStartz)+ miniStartz);
-        //Debug.Log("AAAAA"+miniPlayermove);
+
+        miniMapPlayerImg.transform.forward = GameObject.Find("Character(Clone)").transform.forward;
+        miniMapPlayerImg.transform.Rotate(0, 90, 0);
+
         this.transform.position = miniPlayermove;
     }
 }
