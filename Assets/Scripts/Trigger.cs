@@ -39,6 +39,7 @@ public class Trigger : MonoBehaviour
             {
                 Camera.main.transform.position = gameObject.transform.position + new Vector3(-20f, 8.5f, 0);
                 Camera.main.transform.forward = CMRotateBattle01;
+                GameObject.Find("MiniMapPlane").transform.Rotate(0, 180, 0);
             }
 
             FlowPlayer.offect = new Vector3(-20f, 8.5f, 0);
@@ -59,10 +60,12 @@ public class Trigger : MonoBehaviour
             {
                 Camera.main.transform.position = gameObject.transform.position + new Vector3(20f, 8.5f, 0);
                 Camera.main.transform.forward = CMRotateVillage;
+                GameObject.Find("MiniMapPlane").transform.Rotate(0,-180,0);
             }
             FlowPlayer.offect = new Vector3(20f, 8.5f, 0);
             FlowPlayer.CMRotate = CMRotateVillage;
             FlowPlayer.smoothTime = 0.25f;
+            
             Viking_Tower.SetActive(false);
         }
         else if (colliderTag == "ClipNear01")
