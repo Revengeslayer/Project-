@@ -48,10 +48,8 @@ public class FlowPlayer : MonoBehaviour
     void Update()
     {
         SetCameraPos();
-        //BasicMove();
         ViewScroll();
     }
-
     private void FixedUpdate()
     {
         BasicMove();

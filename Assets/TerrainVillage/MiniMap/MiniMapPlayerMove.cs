@@ -55,7 +55,7 @@ public class MiniMapPlayerMove : MonoBehaviour
         miniEndz = GameObject.Find("MiniMapEnd").transform.position.z;
 
         miniPlayermove = new Vector3( ((mapPlayerx-mapStartx)/(mapEndx-mapStartx))*(miniEndx-miniStartx)+ miniStartx, this.transform.position.y, ((mapPlayerz-mapStartz)/(mapEndz-mapStartz))*(miniEndz-miniStartz)+ miniStartz);
-        Debug.Log("AAAAA"+miniPlayermove);
+        //Debug.Log("AAAAA"+miniPlayermove);
         this.transform.position = miniPlayermove;
     }
 }

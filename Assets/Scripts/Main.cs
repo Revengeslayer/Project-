@@ -7,6 +7,9 @@ public class Main : MonoBehaviour
 {
     public float speed;
     public static bool canMove;
+    bool isAttack;
+    bool isJump;
+    bool isRun;
     private List<GameObject> monsterPrefabIns;
     private List<GameObject> terrainPrefabIns;
     public static  GameObject player;
@@ -35,16 +38,13 @@ public class Main : MonoBehaviour
     void Start()
     {
     }
-
-    // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        Bye();
-        
-        bool isAttack=playerAnimator.GetBool("isAttack");
+        bool isAttack = playerAnimator.GetBool("isAttack");
         bool isJump = playerAnimator.GetBool("isJump");
         bool isRun = playerAnimator.GetBool("isRun");
-        bool isDodge = playerAnimator.GetBool("isDodge");
+        //bool isDodge = playerAnimator.GetBool("isDodge");
+
 
         if (Input.GetKeyDown(KeyCode.LeftControl) && !isRun)
         {
@@ -59,28 +59,23 @@ public class Main : MonoBehaviour
             playerAnimator.SetBool("isRun", false);
         }
 
-        AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
-
-        MoveFunc(isAttack, isJump, isRun);
-        
-
         if (Input.GetKeyDown(KeyCode.Z) && !isJump)
         {
             playerAnimator.SetTrigger("Attack");
             //playerAnimator.SetBool("isAttack", true);
             playerAnimator.SetInteger("atkCount", playerAnimator.GetInteger("atkCount") + 1);
-            player.transform.position += player.transform.forward * Time.deltaTime * speed;          
+            player.transform.position += player.transform.forward * Time.deltaTime * speed;
         }
-        if (Input.GetButtonDown("Jump") && Time.time > canJump )
+        if (Input.GetButtonDown("Jump") && Time.time > canJump)
         {
             playerAnimator.SetTrigger("Jump");
             playerRigidbody.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
-            if(Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 playerAnimator.SetBool("isJumpAtk", true);
             }
-                
+
         }
         if (Input.GetKeyDown(KeyCode.C) && !isJump)
         {
@@ -88,6 +83,19 @@ public class Main : MonoBehaviour
             player.transform.position += player.transform.forward * Time.deltaTime * speed;
         }
 
+        
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        //Bye();
+        //if (playerRigidbody.velocity.x < 1 && playerRigidbody.velocity.z < 1)
+        //{
+        //    playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -9.8f, playerRigidbody.velocity.z);
+        //}
+        MoveFunc(isAttack, isJump, isRun);
+        
     }
 
     void MoveFunc(bool isAttack, bool isJump , bool isRun)
