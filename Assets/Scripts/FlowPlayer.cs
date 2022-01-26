@@ -13,16 +13,12 @@ public class FlowPlayer : MonoBehaviour
     public float xPos;
     private float yPos;
     public float zPos;
-    //public float up = 1;
-    //public float left = 1;
-    //public float right = 1;
     public float rayLength;
     public LayerMask CameraHitLayer;
     private Vector3 upPos;
     private Vector3 downPos;
     private Vector3 leftPos;
     private Vector3 rightPos;
-    private Vector3 hitPos;
     public float forDown;
     bool bRayDown;
     bool bRayRight;
@@ -37,6 +33,8 @@ public class FlowPlayer : MonoBehaviour
     private Vector3 FollowArea;
     private Vector3 FollowVec;
     float Fo;
+    public float scrollSpeed = 5;
+    public float FOV;
 
     private void Start()
     {
@@ -45,23 +43,16 @@ public class FlowPlayer : MonoBehaviour
         gameObject.transform.forward = new Vector3(gameObject.transform.forward.x * -1, gameObject.transform.forward.y, gameObject.transform.forward.z );
         CMRotate = gameObject.transform.forward;
         FollowVec = playerPos.position - gameObject.transform.position;
+        FOV = Camera.main.fieldOfView;
     }
     void Update()
     {
         SetCameraPos();
         BasicMove();
+        ViewScroll();
     }
     public static void SetCameraRotate()
     {
-        //if(colliderTag == "TriggerVillage")
-        //{
-        //    BasicMove();
-        //}
-        //else
-        //{
-        //    BasicMove();
-        //}
-
     }
     void CheckFollow()
     {        
@@ -90,6 +81,21 @@ public class FlowPlayer : MonoBehaviour
             gameObject.transform.forward += (CMRotate / smoothTime * Time.deltaTime) * (CMRotate - gameObject.transform.forward).magnitude ;
            //FollowVec = playerPos.position - gameObject.transform.position;
         }
+    }
+    void ViewScroll()
+    {
+        var S = Input.GetAxisRaw("Mouse ScrollWheel") * scrollSpeed;
+        FOV -= S;
+        if(FOV > 35)
+        {
+            FOV = 35;
+        }
+        else if(FOV < 18)
+        {
+            FOV = 18;
+        }
+        Camera.main.fieldOfView = FOV;
+
     }
     #region Set & Ray
     void CameraRaycast()

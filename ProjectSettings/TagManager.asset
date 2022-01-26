@@ -15,6 +15,7 @@ TagManager:
   - Battle01_1
   - Battle01(1)
   - Village01
+  - ClipNear01
   layers:
   - Default
   - TransparentFX

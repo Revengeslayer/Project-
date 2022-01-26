@@ -10,7 +10,7 @@ public class Trigger : MonoBehaviour
     private Vector3 CMRotateBattle01;
     private Vector3 Boss01_1;
     private float YT;
-
+    private GameObject Viking_Tower;
 
     // Start is called before the first frame update
 
@@ -21,6 +21,7 @@ public class Trigger : MonoBehaviour
         CMRotateVillage = Camera.main.transform.forward;
         CMRotateBattle01 = new Vector3(CMRotateVillage.x * -1, CMRotateVillage.y, CMRotateVillage.z * -1);
         Boss01_1 = -Camera.main.transform.right;
+        Viking_Tower = GameObject.Find("Viking_Tower");
     }
     void Update()
     {
@@ -43,25 +44,10 @@ public class Trigger : MonoBehaviour
             FlowPlayer.offect = new Vector3(-20f, 8.5f, 0);
             FlowPlayer.CMRotate = CMRotateBattle01;
             FlowPlayer.smoothTime = 0.25f;
-            //if (FlowPlayer.offect.x < 0)
-            //{
-            //    return;
-            //}
-            //else
-            //{
-            //    Debug.Log("<0");
-            //    Camera.main.transform.forward = CMRotateBattle01;
-            //}
-
+            Viking_Tower.SetActive(true);
         }
         else if (colliderTag == "Village01")
         {
-            //    //FlowPlayer.XT *= -1;
-            //    //FlowPlayer.ZT *= -1;
-            //    //FlowPlayer.SetCameraRotate();
-            //    CA.transform.forward = 
-            //    FlowPlayer.colliderTag = colliderTag;
-
             FlowPlayer.CARotate = true;
             FlowPlayer.offect = new Vector3(-8.5f, 7.5f, 0);
             FlowPlayer.CMRotate = CMRotateBattle01;
@@ -77,69 +63,11 @@ public class Trigger : MonoBehaviour
             FlowPlayer.offect = new Vector3(20f, 8.5f, 0);
             FlowPlayer.CMRotate = CMRotateVillage;
             FlowPlayer.smoothTime = 0.25f;
-            //if (FlowPlayer.offect.x > 0)
-            //{
-            //    return;
-            //}
-            //else
-            //{
-            //    Debug.Log(">0");
-            //    Camera.main.transform.forward = CMRotateVillage;
-            //}
-
+            Viking_Tower.SetActive(false);
         }
-        else if (colliderTag == "Battle01(1)")
+        else if (colliderTag == "ClipNear01")
         {
-            FlowPlayer.CARotate = true;
-            FlowPlayer.offect = new Vector3(8.5f, 10f, 0);
-            FlowPlayer.CMRotate = CMRotateVillage;
-            FlowPlayer.smoothTime = 3f;
-        }
-        else if(colliderTag == "Boss01")
-        {
-            FlowPlayer.offect = new Vector3(10f, 9f, 0);
-            FlowPlayer.CMRotate = CMRotateVillage;
-            FlowPlayer.smoothTime = 3;
-        }
-        else if (colliderTag == "Boss01_1")
-        {
-            FlowPlayer.offect = new Vector3(0, 1.0f, 3f);
-            //FlowPlayer.offect = new Vector3(0, 1.3f , 3);
-            FlowPlayer.CMRotate = Boss01_1;//- new Vector3(0, 0.5f, 0);
-            FlowPlayer.smoothTime = 2;
-        }
-        else if (colliderTag == "Boss01_2")
-        {
-            FlowPlayer.offect = new Vector3(10f, 9f, 0f);
-            //FlowPlayer.offect = new Vector3(0, 1.3f , 3);
-            //FlowPlayer.CMRotate = Boss01_1 - new Vector3(0, 0.5f, 0);
-            FlowPlayer.CMRotate = CMRotateVillage;
-            FlowPlayer.smoothTime = 2f;
-        }
-        else if (colliderTag == "Boss01_3")
-        {
-            FlowPlayer.offect = new Vector3(0, 5f, 6.5f);
-            //FlowPlayer.offect = new Vector3(0, 1.3f , 3);
-            FlowPlayer.CMRotate = Boss01_1 - new Vector3(0, 0.5f, 0);
-            FlowPlayer.smoothTime = 2;
-        }
-        else if (colliderTag == "Boss01_4")
-        {
-            FlowPlayer.offect = new Vector3(13.5f, 7.5f, 0);
-            FlowPlayer.CMRotate = CMRotateVillage;
-            FlowPlayer.smoothTime = 0.5f;
-        }
-        else if (colliderTag == "Battle01_2")
-        {
-            FlowPlayer.offect = new Vector3(11.5f, 7.5f, 0);
-            FlowPlayer.CMRotate = CMRotateVillage;
-            FlowPlayer.smoothTime = 3f;
-        }
-
-        else
-        {
-            //FlowPlayer.offect = new Vector3(8.5f, 5.5f, 0);
-            //colliderTag = "";
+            Camera.main.nearClipPlane = 8.6f;
         }
     }
     private void OnTriggerStay(Collider other)
@@ -173,11 +101,9 @@ public class Trigger : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         colliderTag = other.tag;
-        if (colliderTag == "Boss01_2")
+        if (colliderTag == "ClipNear01")
         {
-            FlowPlayer.offect = new Vector3(10f, 9f, 0);
-            FlowPlayer.CMRotate = CMRotateVillage;
-            FlowPlayer.smoothTime = 2;
+            Camera.main.nearClipPlane = 0.1f;
         }
     }
 
