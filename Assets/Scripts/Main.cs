@@ -25,6 +25,7 @@ public class Main : MonoBehaviour
     private float firstClickTime;
     private float secClickTime;
     private float doubleSpacing=0.2f;
+    private float NextDash;
     
     private void Awake()
     {
@@ -40,10 +41,9 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        bool isAttack = playerAnimator.GetBool("isAttack");
-        bool isJump = playerAnimator.GetBool("isJump");
-        bool isRun = playerAnimator.GetBool("isRun");
-        //bool isDodge = playerAnimator.GetBool("isDodge");
+        isAttack = playerAnimator.GetBool("isAttack");
+        isJump = playerAnimator.GetBool("isJump");
+        isRun = playerAnimator.GetBool("isRun");
 
 
         if (Input.GetKeyDown(KeyCode.LeftControl) && !isRun)
@@ -62,8 +62,9 @@ public class Main : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && !isJump)
         {
             playerAnimator.SetTrigger("Attack");
-            //playerAnimator.SetBool("isAttack", true);
+            playerAnimator.SetBool("isAttack", true);
             playerAnimator.SetInteger("atkCount", playerAnimator.GetInteger("atkCount") + 1);
+            playerAnimator.applyRootMotion = (true);
             player.transform.position += player.transform.forward * Time.deltaTime * speed;
         }
         if (Input.GetButtonDown("Jump") && Time.time > canJump)
@@ -77,14 +78,17 @@ public class Main : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.C) && !isJump)
+        if (Input.GetKeyDown(KeyCode.C) && !isJump && Time.time > NextDash)
         {
             playerAnimator.applyRootMotion = (true);
             playerAnimator.SetTrigger("Dodge");
-            player.transform.position += player.transform.forward * Time.deltaTime * speed;
+            //player.transform.position += player.transform.forward * Time.deltaTime * speed*50;
+            NextDash = Time.time + 2f;
         }
 
         
+
+
     }
 
     // Update is called once per frame
@@ -239,6 +243,7 @@ public class Main : MonoBehaviour
         if (n != 0)
         {
             player.transform.position += CheckForWard() * Time.deltaTime * Accel() * n;
+            //playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -9.8f, playerRigidbody.velocity.z);
         }
     }
     float Accel()
