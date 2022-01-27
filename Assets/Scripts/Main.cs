@@ -245,4 +245,5 @@ public class Main : MonoBehaviour
         float move = Mathf.Lerp(0, speed, 0.3f);
         return move;
     }
+    
 }

@@ -30,7 +30,7 @@ public class MiniMapPlayerMove : MonoBehaviour
     } 
 
 
-    void Update()
+    void FixedUpdate()
     {
         MiniMapPlayerMoves();
     }
@@ -59,7 +59,6 @@ public class MiniMapPlayerMove : MonoBehaviour
 
         miniMapPlayerImg.transform.forward = GameObject.Find("Character(Clone)").transform.forward;
         miniMapPlayerImg.transform.Rotate(0, 90, 0);
-
         this.transform.position = miniPlayermove;
     }
 }
