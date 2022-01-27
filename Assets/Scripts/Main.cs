@@ -79,6 +79,7 @@ public class Main : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.C) && !isJump)
         {
+            playerAnimator.applyRootMotion = (true);
             playerAnimator.SetTrigger("Dodge");
             player.transform.position += player.transform.forward * Time.deltaTime * speed;
         }
