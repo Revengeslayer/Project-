@@ -39,7 +39,7 @@ public class Trigger : MonoBehaviour
             {
                 Camera.main.transform.position = gameObject.transform.position + new Vector3(-20f, 8.5f, 0);
                 Camera.main.transform.forward = CMRotateBattle01;
-                GameObject.Find("MiniMapPlane").transform.Rotate(0, 180, 0);
+                GameObject.Find("MiniMapCamera").transform.Rotate(0, 0, 180);
             }
 
             FlowPlayer.offect = new Vector3(-20f, 8.5f, 0);
@@ -60,7 +60,7 @@ public class Trigger : MonoBehaviour
             {
                 Camera.main.transform.position = gameObject.transform.position + new Vector3(20f, 8.5f, 0);
                 Camera.main.transform.forward = CMRotateVillage;
-                GameObject.Find("MiniMapPlane").transform.Rotate(0,-180,0);
+                GameObject.Find("MiniMapCamera").transform.Rotate(0,0,-180);
             }
             FlowPlayer.offect = new Vector3(20f, 8.5f, 0);
             FlowPlayer.CMRotate = CMRotateVillage;
@@ -76,7 +76,7 @@ public class Trigger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         var Y = Input.GetKeyDown(KeyCode.Y);
-        var T = 0.2f;
+        var T = 0.1f;
         YT += Time.deltaTime;
         if(Y == false)
         {
