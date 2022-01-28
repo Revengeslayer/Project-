@@ -79,14 +79,14 @@ public class Main : MonoBehaviour
                 playerAnimator.SetBool("isJumpAtk", true);
             }
 
-        }*/
+        }
         if (Input.GetKeyDown(KeyCode.C) && !isJump && Time.time > NextDash)
         {
             playerAnimator.applyRootMotion = (true);
             playerAnimator.SetTrigger("Dodge");
             //player.transform.position += player.transform.forward * Time.deltaTime * speed*50;
             NextDash = Time.time + 2f;
-        }
+        }*/
 
         
 
