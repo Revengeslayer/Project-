@@ -11,7 +11,7 @@ public class Trigger : MonoBehaviour
     private Vector3 Boss01_1;
     private float YT;
     private GameObject Viking_Tower;
-
+    private GameObject Tree;
     // Start is called before the first frame update
 
 
@@ -22,6 +22,7 @@ public class Trigger : MonoBehaviour
         CMRotateBattle01 = new Vector3(CMRotateVillage.x * -1, CMRotateVillage.y, CMRotateVillage.z * -1);
         Boss01_1 = -Camera.main.transform.right;
         Viking_Tower = GameObject.Find("Viking_Tower");
+        Tree = GameObject.Find("tree03(4)");
     }
     void Update()
     {
@@ -46,6 +47,7 @@ public class Trigger : MonoBehaviour
             FlowPlayer.CMRotate = CMRotateBattle01;
             FlowPlayer.smoothTime = 0.25f;
             Viking_Tower.SetActive(true);
+            Tree.SetActive(true);
         }
         else if (colliderTag == "Village01")
         {
@@ -67,6 +69,7 @@ public class Trigger : MonoBehaviour
             FlowPlayer.smoothTime = 0.25f;
             
             Viking_Tower.SetActive(false);
+            Tree.SetActive(false);
         }
         else if (colliderTag == "ClipNear01")
         {
@@ -86,7 +89,7 @@ public class Trigger : MonoBehaviour
         {
             if (Y && YT >T)
             {
-                gameObject.transform.position = new Vector3(25.36502f, 3.036211f, 39.22498f);
+                gameObject.transform.position = new Vector3(23.71191f, 2.691814f, 39.16151f);
                 YT = 0;
                 Y = false;
             }
@@ -95,7 +98,7 @@ public class Trigger : MonoBehaviour
         {
             if (Y && YT > T)
             {
-                gameObject.transform.position = new Vector3(30.50537f, 2.88238f, 38.95977f);
+                gameObject.transform.position = new Vector3(32.21911f, 3.003113f, 39.03258f);
                 YT = 0;
                 Y = false;
             }
