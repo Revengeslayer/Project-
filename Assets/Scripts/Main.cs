@@ -34,7 +34,9 @@ public class Main : MonoBehaviour
         //Mobs();
         Player();
         SetCamera();
-        
+       
+
+
     }
     void Start()
     {
@@ -59,7 +61,7 @@ public class Main : MonoBehaviour
             playerAnimator.SetBool("isRun", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && !isJump)
+       /* if (Input.GetKeyDown(KeyCode.Z) && !isJump)
         {
             playerAnimator.SetTrigger("Attack");
             playerAnimator.SetBool("isAttack", true);
@@ -84,7 +86,7 @@ public class Main : MonoBehaviour
             playerAnimator.SetTrigger("Dodge");
             //player.transform.position += player.transform.forward * Time.deltaTime * speed*50;
             NextDash = Time.time + 2f;
-        }
+        }*/
 
         
 
