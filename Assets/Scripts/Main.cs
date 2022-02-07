@@ -61,7 +61,7 @@ public class Main : MonoBehaviour
             playerAnimator.SetBool("isRun", false);
         }
 
-       if (Input.GetKeyDown(KeyCode.Z) && !isJump)
+       /* if (Input.GetKeyDown(KeyCode.Z) && !isJump)
         {
             playerAnimator.SetTrigger("Attack");
             playerAnimator.SetBool("isAttack", true);
@@ -69,7 +69,7 @@ public class Main : MonoBehaviour
             playerAnimator.applyRootMotion = (true);
             player.transform.position += player.transform.forward * Time.deltaTime * speed;
         }
-       /* if (Input.GetButtonDown("Jump") && Time.time > canJump)
+        if (Input.GetButtonDown("Jump") && Time.time > canJump)
         {
             playerAnimator.SetTrigger("Jump");
             playerRigidbody.AddForce(0, jumpForce, 0);

@@ -16,7 +16,6 @@ TagManager:
   - Battle01(1)
   - Village01
   - ClipNear01
-  - Monster
   layers:
   - Default
   - TransparentFX
