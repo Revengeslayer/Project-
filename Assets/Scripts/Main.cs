@@ -25,6 +25,8 @@ public class Main : MonoBehaviour
     private float firstClickTime;
     private float secClickTime;
     private float doubleSpacing=0.2f;
+
+    private float atkLastTime;
     private float NextDash;
     
     private void Awake()
@@ -61,15 +63,55 @@ public class Main : MonoBehaviour
             playerAnimator.SetBool("isRun", false);
         }
 
-       if (Input.GetKeyDown(KeyCode.Z) && !isJump)
+
+        if (Input.GetKeyDown(KeyCode.Z) && !isJump)
         {
-            playerAnimator.SetTrigger("Attack");
-            playerAnimator.SetBool("isAttack", true);
+            //playerAnimator.SetTrigger("Attack");
+            
             playerAnimator.SetInteger("atkCount", playerAnimator.GetInteger("atkCount") + 1);
-            playerAnimator.applyRootMotion = (true);
+            if(playerAnimator.GetInteger("atkCount") ==1)
+            {
+                atkLastTime = Time.time;
+            }
+            //playerAnimator.SetBool("isAttack", true);
+
+            //if (playerAnimator.GetInteger("atkCount") == 1)
+            //{
+            //    playerAnimator.SetBool("hit1", true);
+            //}
+
+            //if (playerAnimator.GetInteger("atkCount") == 3)
+            //{
+            //    playerAnimator.SetBool("hit3", true);
+            //    playerAnimator.SetBool("hit2", false);
+            //    playerAnimator.SetInteger("atkCount", 0);
+            //}
+
+            //if (playerAnimator.GetInteger("atkCount") == 2 && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Atk1") && Time.time - atkLastTime < 0.7)
+            //{
+
+            //    playerAnimator.SetBool("hit2", true);
+            //    playerAnimator.SetBool("hit1", false);
+            //}
+
+            if(playerAnimator.GetInteger("atkCount")==3 || Time.time-atkLastTime>0.7f)
+            {
+                playerAnimator.SetInteger("atkCount", 0);
+            }
+            
+
+            playerAnimator.SetInteger("atkCount", Mathf.Clamp(playerAnimator.GetInteger("atkCount"), 0, 3));
+            //playerAnimator.applyRootMotion = (true);
             player.transform.position += player.transform.forward * Time.deltaTime * speed;
         }
-       /* if (Input.GetButtonDown("Jump") && Time.time > canJump)
+
+        if (Time.time - atkLastTime > 0.5f)
+        {
+            playerAnimator.SetInteger("atkCount", 0);
+        }
+
+        /*
+        if (Input.GetButtonDown("Jump") && Time.time > canJump)
         {
             playerAnimator.SetTrigger("Jump");
             playerRigidbody.AddForce(0, jumpForce, 0);
@@ -88,7 +130,7 @@ public class Main : MonoBehaviour
             NextDash = Time.time + 2f;
         }*/
 
-        
+
 
 
     }
