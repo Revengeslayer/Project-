@@ -6796,6 +6796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1996255497878800590}
   - component: {fileID: 4941105637646279167}
+  - component: {fileID: 7355294003159557279}
   m_Layer: 0
   m_Name: Hoshi_katana
   m_TagString: Untagged
@@ -6870,6 +6871,19 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: 0.0148644, z: 0.4724965}
     m_Extent: {x: 0.07008274, y: 0.08494714, z: 0.6170498}
   m_DirtyAABB: 0
+--- !u!65 &7355294003159557279
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614283885409971661}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.14016575, y: 0.16989456, z: 0.93036664}
+  m_Center: {x: -0.000000033116592, y: 0.01486439, z: 0.6243622}
 --- !u!1 &7663642870342285031
 GameObject:
   m_ObjectHideFlags: 0
